@@ -17,6 +17,6 @@ public class MainModel {
     public void loadFromDB() {
         Database db = new Database();
         this.names.clear();
-        this.names.addAll(db.getAllPosts());
+        this.names.addAll(db.constructPosts());
     }
 }

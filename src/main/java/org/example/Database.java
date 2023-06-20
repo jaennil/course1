@@ -61,10 +61,9 @@ public class Database {
         }
     }
 
-    public static boolean checkCredentials(String username, String password) {
+    public static boolean checkCredentials(String username, String passwordHash) {
         getInstance();
-        String hash = Hash.toString(Hash.hash(password));
-        try (ResultSet result = query("SELECT * FROM accounts WHERE username = '" + username + "' AND passwordHash = '" + hash + "'")) {
+        try (ResultSet result = query("SELECT * FROM accounts WHERE username = '" + username + "' AND passwordHash = '" + passwordHash + "'")) {
             if (result.next()) {
                 return true;
             }
@@ -74,9 +73,8 @@ public class Database {
         }
     }
 
-    public static void addUser(String username, String password) {
+    public static void addUser(String username, String passwordHash) {
         getInstance();
-        String hash = Hash.toString(Hash.hash(password));
-        update("INSERT INTO accounts (username, passwordHash) value ('" + username + "', '" + hash + "')");
+        update("INSERT INTO accounts (username, passwordHash) value ('" + username + "', '" + passwordHash + "')");
     }
 }

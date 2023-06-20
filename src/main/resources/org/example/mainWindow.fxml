@@ -6,12 +6,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MainController">
-    <TableView layoutX="10.0" layoutY="11.0" prefHeight="365.0" prefWidth="390.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.0"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MainController">
+    <TableView fx:id="tablePosts" layoutX="10.0" layoutY="11.0" prefHeight="365.0" prefWidth="390.0">
         <columns>
-            <TableColumn fx:id="posts" prefWidth="389.0" text="posts" />
+            <TableColumn fx:id="columnPost" prefWidth="389.0" text="posts"/>
         </columns>
     </TableView>
-    <Button fx:id="loadDatabaseButton" layoutX="444.0" layoutY="109.0" mnemonicParsing="false" onAction="#loadDatabase" text="load from database" />
-    <Label fx:id="clickedAmountLabel" layoutX="460.0" layoutY="63.0" text="clicked amount: " />
+    <Button fx:id="loadDatabaseButton" layoutX="444.0" layoutY="109.0" mnemonicParsing="false" onAction="#clickBtn"
+            text="click me"/>
 </AnchorPane>

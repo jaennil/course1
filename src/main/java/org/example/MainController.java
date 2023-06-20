@@ -2,21 +2,35 @@ package org.example;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class MainController {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    public Button loadDatabaseButton;
-    public TableColumn posts;
+public class MainController implements Initializable {
 
     @FXML
-    private Label clickedAmountLabel;
+    private Button loadDatabaseButton;
+    @FXML
+    private TableView<Post> tablePosts;
+    @FXML
+    public TableColumn columnPost;
+    private MainModel model = new MainModel();
 
-    private int clickedAmount = 0;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tablePosts.setItems(model.getNames()); // binds the list with the model
+        columnPost.setCellValueFactory(new PropertyValueFactory<>("name"));
+    }
 
-    public void loadDatabase(ActionEvent actionEvent) {
-        clickedAmountLabel.setText("clicked " + clickedAmount++ + " times!");
+    @FXML
+    private void clickBtn(ActionEvent actionEvent) {
+        loadDatabaseButton.setText("loaded from database");
+        model.loadFromDB();
     }
 }

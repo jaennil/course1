@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MainController">
+    <TableView layoutX="10.0" layoutY="11.0" prefHeight="365.0" prefWidth="390.0">
+        <columns>
+            <TableColumn fx:id="posts" prefWidth="389.0" text="posts" />
+        </columns>
+    </TableView>
+    <Button fx:id="loadDatabaseButton" layoutX="444.0" layoutY="109.0" mnemonicParsing="false" onAction="#loadDatabase" text="load from database" />
+    <Label fx:id="clickedAmountLabel" layoutX="460.0" layoutY="63.0" text="clicked amount: " />
+</AnchorPane>

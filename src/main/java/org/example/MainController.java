@@ -19,13 +19,19 @@ public class MainController implements Initializable {
     @FXML
     private TableView<Post> tablePosts;
     @FXML
-    public TableColumn columnPost;
+    public TableColumn idColumn;
+    @FXML
+    public TableColumn nameColumn;
+    @FXML
+    public TableColumn shortNameColumn;
     private MainModel model = new MainModel();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tablePosts.setItems(model.getNames()); // binds the list with the model
-        columnPost.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tablePosts.setItems(model.getPosts()); // binds the list with the model
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        shortNameColumn.setCellValueFactory(new PropertyValueFactory<>("shortName"));
     }
 
     @FXML

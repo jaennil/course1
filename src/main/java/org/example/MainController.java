@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,8 +13,6 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    @FXML
-    private Button loadDatabaseButton;
     @FXML
     private TableView<Post> tablePosts;
     @FXML
@@ -36,7 +33,6 @@ public class MainController implements Initializable {
 
     @FXML
     private void clickBtn(ActionEvent actionEvent) {
-        loadDatabaseButton.setText("loaded from database");
-        model.loadFromDB();
+        model.loadPostsFromDB();
     }
 }

@@ -14,7 +14,7 @@ public class MainModel {
         return posts;
     }
 
-    public void loadFromDB() {
+    public void loadPostsFromDB() {
         Database database = Database.getInstance();
         this.posts.clear();
         this.posts.addAll(database.readPostsFromDB());

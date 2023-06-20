@@ -16,6 +16,7 @@ public class Database {
     }
 
     public ArrayList<Post> readPostsFromDB() {
+        getInstance();
         ArrayList<Post> posts = new ArrayList<>();
         try (ResultSet queryResult = query("SELECT * FROM posts")) {
             while (queryResult.next()) {
@@ -42,11 +43,40 @@ public class Database {
         }
     }
 
-    private ResultSet query(String query) {
+    public static ResultSet query(String query) {
+        getInstance();
         try {
             return statement.executeQuery(query);
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    public static int update(String query) {
+        getInstance();
+        try {
+            return statement.executeUpdate(query);
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public static boolean checkCredentials(String username, String password) {
+        getInstance();
+        String hash = Hash.toString(Hash.hash(password));
+        try (ResultSet result = query("SELECT * FROM accounts WHERE username = '" + username + "' AND passwordHash = '" + hash + "'")) {
+            if (result.next()) {
+                return true;
+            }
+            return false;
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public static void addUser(String username, String password) {
+        getInstance();
+        String hash = Hash.toString(Hash.hash(password));
+        update("INSERT INTO accounts (username, passwordHash) value ('" + username + "', '" + hash + "')");
     }
 }

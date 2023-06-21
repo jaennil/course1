@@ -3,8 +3,6 @@ package org.example;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
-
 public class AuthorizationController {
     private AuthorizationModel model = new AuthorizationModel();
     public TextField usernameField;
@@ -21,5 +19,4 @@ public class AuthorizationController {
         String inputPassword = passwordField.getText();
         model.signUpUser(inputUsername, inputPassword);
     }
-
 }

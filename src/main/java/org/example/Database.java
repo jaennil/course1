@@ -15,7 +15,7 @@ public class Database {
         return instance;
     }
 
-    public ArrayList<Post> readPostsFromDB() {
+    public ArrayList<Post> readPosts() {
         getInstance();
         ArrayList<Post> posts = new ArrayList<>();
         try (ResultSet queryResult = query("SELECT * FROM posts")) {

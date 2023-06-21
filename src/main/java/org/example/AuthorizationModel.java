@@ -17,7 +17,11 @@ public class AuthorizationModel {
     }
     public void signUpUser(String username, String password) {
         String hash = Hash.toString(Hash.hash(password));
-        Database.addUser(username, hash);
+        if (Database.checkCredentials(username, hash)) {
+            System.out.println("you already registered. please sign in with your credentials");
+        } else {
+            Database.addUser(username, hash);
+        }
         System.out.println("please sign in now");
     }
 }

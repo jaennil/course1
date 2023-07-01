@@ -3,16 +3,17 @@ package org.example;
 import java.io.IOException;
 
 public class AuthorizationModel {
-    public void signInUser(String username, String password) {
+    public boolean signInUser(String username, String password) {
         String hash = Hash.toString(Hash.hash(password));
         if (Database.checkCredentials(username, hash)) {
             try {
                 App.setRoot("mainWindow");
+                return true;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         } else {
-            System.out.println("you dont exist in the database. please sign up first");
+            return false;
         }
     }
     public void signUpUser(String username, String password) {

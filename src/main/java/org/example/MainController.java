@@ -21,7 +21,7 @@ public class MainController implements Initializable {
     public TableColumn nameColumn;
     @FXML
     public TableColumn shortNameColumn;
-    private MainModel model = new MainModel();
+    private final MainModel model = new MainModel();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

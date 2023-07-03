@@ -19,22 +19,21 @@ public class Loading implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        delay(1000, () -> {
-            Database.getInstance();
-            boolean connected = Database.connect();
-            if (!connected) {
-                connectionProgress.setText("Failed to connect. Please check your VPN and restart the app.");
-                return;
-            }
+        Database.getInstance();
+        boolean connected = Database.connect();
+        if (!connected) {
+            connectionProgress.setText("Failed to connect. Please check your VPN and restart the app.");
+            return;
+        }
 
-            connectionProgress.setText("Successfully connected. Please wait");
-            Platform.runLater(() -> {
-                try {
-                    App.setRoot("authorization");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+        connectionProgress.setText("Successfully connected. Please wait");
+        Platform.runLater(() -> {
+            try {
+                App.setRoot("authorization");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 //            delay(1000, () -> {
 //                try {
 //                    App.setRoot("authorization");
@@ -42,8 +41,8 @@ public class Loading implements Initializable {
 //                    throw new RuntimeException(e);
 //                }
 //            });
-        });
     }
+
     public static void delay(long millis, Runnable continuation) {
         Task<Void> sleeper = new Task<>() {
             @Override

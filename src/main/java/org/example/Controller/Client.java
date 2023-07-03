@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
+import org.example.Database;
 
 import java.net.URL;
 
@@ -19,7 +20,7 @@ public class Client implements Initializable {
     private static final org.example.Model.Client model = new org.example.Model.Client();
 
     public void passUsername(String username) {
-        HashMap<String, String> fullName = model.getFullNameByUsername(username);
+        HashMap<String, String> fullName = Database.getFullNameByUsername(username);
         labelText = "Welcome, " + fullName.get("firstname") + " " + fullName.get("lastname");
     }
 

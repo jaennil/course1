@@ -43,18 +43,20 @@ public class Authorization {
             emptyPasswordLabel.setVisible(true);
             return;
         }
-
-        if (result.equals("client")) {
-            try {
-                FXMLLoader loader = new FXMLLoader(App.class.getResource("client.fxml"));
-                Parent root = loader.load();
-                Client clientController = loader.getController();
-                clientController.passUsername(username);
-                Scene scene = signInButton.getScene();
-                scene.setRoot(root);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(result+".fxml"));
+            Parent root = loader.load();
+            if (result.equals("admin")) {
+                Admin controller = loader.getController();
+                controller.passUsername(username);
+            } else if (result.equals("client")) {
+                Client controller = loader.getController();
+                controller.passUsername(username);
             }
+            Scene scene = signInButton.getScene();
+            scene.setRoot(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

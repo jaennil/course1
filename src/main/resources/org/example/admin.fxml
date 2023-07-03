@@ -17,7 +17,7 @@
             <Cursor fx:constant="HAND" />
         </cursor>
     </Label>
-    <Label alignment="TOP_RIGHT" text="Welcome, {firstname} {lastname}" />
+    <Label fx:id="welcomeLabel" text="Welcome, {firstname} {lastname}"/>
     <Label text="Add an employee">
       <font>
          <Font name="System Bold" size="14.0" />

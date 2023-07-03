@@ -1,15 +1,22 @@
 package org.example.Controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
+import org.example.Database;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.ResourceBundle;
 
-public class Admin {
+public class Admin implements Initializable {
     private final org.example.Model.Registration model = new org.example.Model.Registration();
     public Label firstnameEmptyLabel;
     public Label surnameEmptyLabel;
@@ -21,6 +28,8 @@ public class Admin {
     public TextField usernameField;
     public Label passwordEmptyLabel;
     public PasswordField passwordField;
+    public Label welcomeLabel;
+    private String labelText;
 
     public void addEmployee(ActionEvent actionEvent) {
         String firstname = firstnameField.getText();
@@ -49,11 +58,23 @@ public class Admin {
         model.addUser(firstname, surname, lastname, username, password, "employee");
     }
 
+    public void passUsername(String username) {
+        HashMap<String, String> fullName = Database.getFullNameByUsername(username);
+        labelText = "Welcome, " + fullName.get("firstname") + " " + fullName.get("lastname");
+    }
+
     public void logOut(MouseEvent mouseEvent) {
         try {
             App.setRoot("authorization");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> {
+            welcomeLabel.setText(labelText);
+        });
     }
 }

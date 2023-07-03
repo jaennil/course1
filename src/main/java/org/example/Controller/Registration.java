@@ -2,12 +2,15 @@ package org.example.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.example.App;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Registration {
     private final org.example.Model.Registration model = new org.example.Model.Registration();
@@ -48,7 +51,12 @@ public class Registration {
             return;
         }
         model.addUser(firstname, surname, lastname, username, password, "client");
-
+        Node node = (Node)actionEvent.getSource();
+        Stage stage = (Stage)node.getScene().getWindow();
+        ArrayList<String> fio = new ArrayList<>();
+        fio.add(firstname);
+        fio.add(lastname);
+        stage.setUserData(fio);
         try {
             App.setRoot("authorization");
         } catch (IOException e) {

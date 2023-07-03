@@ -1,5 +1,6 @@
 package org.example.Controller;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,13 +28,20 @@ public class Loading implements Initializable {
             }
 
             connectionProgress.setText("Successfully connected. Please wait");
-            delay(1000, () -> {
+            Platform.runLater(() -> {
                 try {
                     App.setRoot("authorization");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             });
+//            delay(1000, () -> {
+//                try {
+//                    App.setRoot("authorization");
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            });
         });
     }
     public static void delay(long millis, Runnable continuation) {

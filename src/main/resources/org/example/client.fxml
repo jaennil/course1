@@ -14,7 +14,7 @@
             <Cursor fx:constant="HAND" />
         </cursor>
     </Label>
-    <Label text="Welcome, {firstname} {lastname}" />
+    <Label fx:id="welcomeLabel" text="Welcome, {firstname} {lastname}" />
     <Label text="Sign up for an appointment">
         <font>
             <Font name="System Bold" size="14.0" />

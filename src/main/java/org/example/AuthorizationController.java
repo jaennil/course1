@@ -5,26 +5,34 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-
 import java.io.IOException;
 
 public class AuthorizationController {
     private final AuthorizationModel model = new AuthorizationModel();
+    public Label emptyUsernameLabel;
+    public Label emptyPasswordLabel;
     @FXML
     private TextField usernameField;
     @FXML
     private TextField passwordField;
-    @FXML
-    private Label resultLabel;
 
     public void onClickSignInButton(ActionEvent actionEvent) {
-        resultLabel.setText("attempting...");
-        String inputUsername = usernameField.getText();
-        String inputPassword = passwordField.getText();
-        boolean signedIn = model.signInUser(inputUsername, inputPassword);
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        boolean usernameIsBlank = username.isBlank();
+        boolean passwordIsBlank = password.isBlank();
+        usernameField.setStyle(usernameIsBlank ? "-fx-border-color: red;" : "");
+        passwordField.setStyle(passwordIsBlank ? "-fx-border-color: red;" : "");
+        emptyUsernameLabel.setVisible(usernameIsBlank);
+        emptyPasswordLabel.setVisible(passwordIsBlank);
+        if (usernameIsBlank || passwordIsBlank)
+            return;
 
+        emptyPasswordLabel.setVisible(true);
+        emptyPasswordLabel.setText("attempting...");
+        boolean signedIn = model.signInUser(username, password);
         if (!signedIn) {
-            resultLabel.setText("wrong login/password");
+            passwordField.setText("wrong login/password");
             return;
         }
 

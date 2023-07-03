@@ -4,11 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 
 public class AuthorizationController {
     private final AuthorizationModel model = new AuthorizationModel();
-    public TextField usernameField;
-    public TextField passwordField;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private TextField passwordField;
     @FXML
     private Label resultLabel;
 
@@ -17,13 +22,24 @@ public class AuthorizationController {
         String inputUsername = usernameField.getText();
         String inputPassword = passwordField.getText();
         boolean signedIn = model.signInUser(inputUsername, inputPassword);
-        if (!signedIn)
+
+        if (!signedIn) {
             resultLabel.setText("wrong login/password");
+            return;
+        }
+
+        try {
+            App.setRoot("mainWindow");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void onClickSignUpButton(ActionEvent actionEvent) {
-        String inputUsername = usernameField.getText();
-        String inputPassword = passwordField.getText();
-        model.signUpUser(inputUsername, inputPassword);
+    public void onClickSignUpButton(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("registration");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

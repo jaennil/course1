@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 public class App extends Application {
 
@@ -23,6 +24,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("authorization"), 640, 480);
         stage.setScene(scene);
         stage.show();
+        /////////////////////////////////////////
+        Database.getInstance();
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

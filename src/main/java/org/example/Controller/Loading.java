@@ -1,14 +1,18 @@
-package org.example;
+package org.example.Controller;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import org.example.App;
+import org.example.Database;
+import org.example.Hash;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoadingController implements Initializable {
+public class Loading implements Initializable {
     @FXML
     private Label connectionProgress;
 
@@ -39,6 +43,7 @@ public class LoadingController implements Initializable {
                 try {
                     Thread.sleep(millis);
                 } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
                 return null;
             }
@@ -46,13 +51,4 @@ public class LoadingController implements Initializable {
         sleeper.setOnSucceeded(event -> continuation.run());
         new Thread(sleeper).start();
     }
-
-//    LoadingController() {
-//        Database db = Database.getInstance();
-//        try {
-//            App.setRoot("authorization");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

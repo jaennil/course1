@@ -1,15 +1,16 @@
-package org.example;
+package org.example.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import org.example.App;
 
 import java.io.IOException;
 
-public class RegistrationController {
-    private final RegistrationModel model = new RegistrationModel();
+public class Registration {
+    private final org.example.Model.Registration model = new org.example.Model.Registration();
     public TextField usernameField;
     public TextField passwordField;
     public TextField firstnameField;
@@ -22,7 +23,7 @@ public class RegistrationController {
     public Label usernameEmptyLabel;
 
     @FXML
-    private void onClickSignUpButton(ActionEvent actionEvent) {
+    protected void onClickSignUpButton(ActionEvent actionEvent) {
         String firstname = firstnameField.getText();
         String surname = surnameField.getText();
         String lastname = lastnameField.getText();
@@ -46,8 +47,13 @@ public class RegistrationController {
         if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank) {
             return;
         }
+        model.addUser(firstname, surname, lastname, username, password, "client");
 
-        model.addUser(firstname, surname, lastname, username, password);
+        try {
+            App.setRoot("authorization");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

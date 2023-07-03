@@ -10,7 +10,7 @@
 
 <?import javafx.scene.layout.HBox?>
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.AuthorizationController">
+      fx:controller="org.example.Controller.Authorization">
     <Label fx:id="emptyUsernameLabel" text="username is empty" textFill="red" visible="false"/>
     <TextField fx:id="usernameField" maxWidth="150" promptText="username"/>
     <Label fx:id="emptyPasswordLabel" text="password is empty" textFill="red" visible="false"/>

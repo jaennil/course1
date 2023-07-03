@@ -1,14 +1,17 @@
-package org.example;
+package org.example.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import java.io.IOException;
+import org.example.App;
 
-public class AuthorizationController {
-    private final AuthorizationModel model = new AuthorizationModel();
+import java.io.IOException;
+import java.util.Objects;
+
+public class Authorization {
+    private final org.example.Model.Authorization model = new org.example.Model.Authorization();
     public Label emptyUsernameLabel;
     public Label emptyPasswordLabel;
     @FXML
@@ -30,17 +33,14 @@ public class AuthorizationController {
 
         emptyPasswordLabel.setVisible(true);
         emptyPasswordLabel.setText("attempting...");
-        boolean signedIn = model.signInUser(username, password);
-        if (!signedIn) {
+        String result = model.signInUser(username, password);
+        if (Objects.equals(result, "wrong credentials")) {
             emptyPasswordLabel.setText("wrong credentials");
             emptyPasswordLabel.setVisible(true);
             return;
         }
-
-
-
         try {
-            App.setRoot("mainWindow");
+            App.setRoot(result);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

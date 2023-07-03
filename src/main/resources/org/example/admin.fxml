@@ -8,7 +8,9 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.Cursor?>
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.Admin">
+<?import javafx.scene.layout.HBox?>
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.Admin">
+    <HBox alignment="TOP_RIGHT" style="-fx-padding: 10px;">
     <Label onMouseClicked="#logOut" text="Log out" textFill="blue">
         <font>
             <Font name="System Bold" size="12.0" />
@@ -17,6 +19,7 @@
             <Cursor fx:constant="HAND" />
         </cursor>
     </Label>
+    </HBox>
     <Label fx:id="welcomeLabel" text="Welcome, {firstname} {lastname}"/>
     <Label text="Add an employee">
       <font>

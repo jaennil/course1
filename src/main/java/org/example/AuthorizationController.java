@@ -37,6 +37,8 @@ public class AuthorizationController {
             return;
         }
 
+
+
         try {
             App.setRoot("mainWindow");
         } catch (IOException e) {

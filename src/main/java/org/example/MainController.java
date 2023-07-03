@@ -6,7 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,5 +35,13 @@ public class MainController implements Initializable {
     @FXML
     private void clickBtn(ActionEvent actionEvent) {
         model.loadPostsFromDB();
+    }
+
+    public void logOut(MouseEvent mouseEvent) {
+        try {
+            App.setRoot("authorization");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

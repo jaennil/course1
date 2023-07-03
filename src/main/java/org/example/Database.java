@@ -45,33 +45,6 @@ public class Database {
         return connection;
     }
 }
-//    public ResultSet query(String query) {
-//        try {
-//            return statement.executeQuery(query);
-//        } catch (Exception exception) {
-//            throw new RuntimeException(exception);
-//        }
-//    }
-//
-//    public int update(String query) {
-//        try {
-//            return statement.executeUpdate(query);
-//        } catch (Exception exception) {
-//            throw new RuntimeException(exception);
-//        }
-//    }
-//
-//    public static boolean checkCredentials(String username, String passwordHash) {
-//        try (ResultSet result = query("SELECT * FROM accounts WHERE username = '" + username + "' AND passwordHash = '" + passwordHash + "'")) {
-//            if (result.next()) {
-//                return true;
-//            }
-//            return false;
-//        } catch (Exception exception) {
-//            throw new RuntimeException(exception);
-//        }
-//    }
-//
 //    public static void addUser(String username, String passwordHash) {
 //        update("INSERT INTO accounts (username, passwordHash) value ('" + username + "', '" + passwordHash + "')");
 //    }

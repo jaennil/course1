@@ -32,7 +32,8 @@ public class AuthorizationController {
         emptyPasswordLabel.setText("attempting...");
         boolean signedIn = model.signInUser(username, password);
         if (!signedIn) {
-            passwordField.setText("wrong login/password");
+            emptyPasswordLabel.setText("wrong credentials");
+            emptyPasswordLabel.setVisible(true);
             return;
         }
 

@@ -2,7 +2,6 @@ package org.example.Model;
 
 import org.example.Database;
 import org.example.Hash;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 

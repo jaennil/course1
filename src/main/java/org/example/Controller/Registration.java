@@ -51,12 +51,6 @@ public class Registration {
             return;
         }
         model.addUser(firstname, surname, lastname, username, password, "client");
-        Node node = (Node)actionEvent.getSource();
-        Stage stage = (Stage)node.getScene().getWindow();
-        ArrayList<String> fio = new ArrayList<>();
-        fio.add(firstname);
-        fio.add(lastname);
-        stage.setUserData(fio);
         try {
             App.setRoot("authorization");
         } catch (IOException e) {

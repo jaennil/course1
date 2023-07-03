@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import org.example.App;
 import org.example.Database;
-import org.example.Hash;
 
 import java.io.IOException;
 import java.net.URL;

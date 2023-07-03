@@ -1,27 +1,40 @@
 package org.example.Controller;
 
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import org.example.App;
-import java.util.ArrayList;
+
+import java.net.URL;
 
 import java.io.IOException;
-import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class Client {
+public class Client implements Initializable {
+
+    public Label welcomeLabel;
+    private String labelText;
+    private static final org.example.Model.Client model = new org.example.Model.Client();
+
+    public void passUsername(String username) {
+        HashMap<String, String> fullName = model.getFullNameByUsername(username);
+        labelText = "Welcome, " + fullName.get("firstname") + " " + fullName.get("lastname");
+    }
 
     public void logOut(MouseEvent mouseEvent) {
-        Stage stage = (Stage) App.scene.getWindow();
-        ArrayList<String> fio = (ArrayList<String>) stage.getUserData();
-        System.out.println(fio.get(0));
-        System.out.println(fio.get(1));
         try {
             App.setRoot("authorization");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> {
+            welcomeLabel.setText(labelText);
+        });
     }
 }

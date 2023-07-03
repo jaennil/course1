@@ -1,6 +1,7 @@
 package org.example;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -14,14 +15,16 @@ public class RegistrationController {
     public TextField firstnameField;
     public TextField surnameField;
 
-    public void onClickSignUpButton(ActionEvent actionEvent) {
+    @FXML
+    private void onClickSignUpButton(ActionEvent actionEvent) {
         String firstname = firstnameField.getText();
         String surname = surnameField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
     }
 
-    public void onClickSignInButton(MouseEvent mouseEvent) {
+    @FXML
+    private void onClickSignInButton(MouseEvent mouseEvent) {
         try {
             App.setRoot("authorization");
         } catch (IOException e) {

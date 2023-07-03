@@ -4,27 +4,36 @@ import java.sql.*;
 
 public class Database {
     private static Database instance;
-    private Connection connection;
-    private final String url = "jdbc:mysql://std-mysql:3306/std_2276_course1";
-    private final String user = "std_2276_course1";
-    private final String password = "naeNN6457";
+    private static Connection connection;
+    private static final String url = "jdbc:mysql://std-mysql:3306/std_2276_course1";
+    private static final String user = "std_2276_course1";
+    private static final String password = "naeNN6457";
 
     private Database() {
-        System.out.println("connecting to database...");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection(url, user, password);
-            System.out.println("successfully connected to database");
-        } catch (SQLException | ClassNotFoundException exception) {
+        } catch (ClassNotFoundException exception) {
             System.out.println("Database Connection Creation Failed : " + exception.getMessage());
         }
+    }
+
+    public static boolean connect() {
+        System.out.println("connecting to database...");
+        try {
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            System.out.println("can't connect to database");
+            return false;
+        }
+        System.out.println("successfully connected to database");
+        return true;
     }
 
     public static Database getInstance() {
         try {
             if (instance == null)
                 instance = new Database();
-            else if (instance.connection.isClosed())
+            else if (connection.isClosed())
                 instance = new Database();
             return instance;
         } catch (SQLException exception) {

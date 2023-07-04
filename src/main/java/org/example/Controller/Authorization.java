@@ -10,8 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
+import org.example.Person;
+
 import java.io.IOException;
-import java.util.Objects;
 
 public class Authorization {
     private final org.example.Model.Authorization model = new org.example.Model.Authorization();
@@ -37,21 +38,23 @@ public class Authorization {
 
         emptyPasswordLabel.setVisible(true);
         emptyPasswordLabel.setText("attempting...");
-        String result = model.signInUser(username, password);
-        if (Objects.equals(result, "wrong credentials")) {
+        Person person = model.signInUser(username, password);
+        if (person == null) {
             emptyPasswordLabel.setText("wrong credentials");
             emptyPasswordLabel.setVisible(true);
             return;
         }
+
+        String personRole = person.getRole();
         try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource(result+".fxml"));
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(personRole+".fxml"));
             Parent root = loader.load();
-            if (result.equals("admin")) {
+            if (personRole.equals("admin")) {
                 Admin controller = loader.getController();
                 controller.passUsername(username);
-            } else if (result.equals("client")) {
+            } else if (personRole.equals("client")) {
                 Client controller = loader.getController();
-                controller.passUsername(username);
+                controller.passPerson(person);
             }
             Scene scene = signInButton.getScene();
             scene.setRoot(root);

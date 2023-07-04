@@ -3,6 +3,7 @@ package org.example.Controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -10,7 +11,6 @@ import javafx.scene.input.MouseEvent;
 import org.example.App;
 import org.example.Database;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -29,6 +29,7 @@ public class Admin implements Initializable {
     public Label passwordEmptyLabel;
     public PasswordField passwordField;
     public Label welcomeLabel;
+    public ComboBox<String> roleComboBox;
     private String labelText;
 
     public void addEmployee(ActionEvent actionEvent) {
@@ -52,10 +53,11 @@ public class Admin implements Initializable {
         lastnameEmptyLabel.setVisible(lastnameIsBlank);
         usernameEmptyLabel.setVisible(usernameIsBlank);
         passwordEmptyLabel.setVisible(passwordIsBlank);
-        if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank) {
+        if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank)
             return;
-        }
-        model.addUser(firstname, surname, lastname, username, password, "employee");
+        if (roleComboBox.getValue() == null)
+            return;
+        model.addUser(firstname, surname, lastname, username, password, roleComboBox.getValue());
     }
 
     public void passUsername(String username) {
@@ -75,6 +77,8 @@ public class Admin implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
             welcomeLabel.setText(labelText);
+            roleComboBox.getItems().add("employee");
+            roleComboBox.getItems().add("doctor");
         });
     }
 }

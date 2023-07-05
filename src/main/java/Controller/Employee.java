@@ -1,33 +1,39 @@
 package Controller;
 
+import Other.Person;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-//public class Main implements Initializable {
-public class Employee {
+public class Employee implements Initializable {
 
-//    @FXML
-//    private TableView<Post> tablePosts;
-    @FXML
-    public TableColumn idColumn;
-    @FXML
-    public TableColumn nameColumn;
-    @FXML
-    public TableColumn shortNameColumn;
     private final Model.Employee model = new Model.Employee();
+    public Label welcomeLabel;
+    public Label welcomeLabel1;
+    public Label welcomeLabel2;
+    private Person person;
 
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        tablePosts.setItems(model.getPosts()); // binds the list with the model
-//        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        shortNameColumn.setCellValueFactory(new PropertyValueFactory<>("shortName"));
-//    }
+    public void passPerson(Person person) {
+        this.person = person;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Platform.runLater(() -> {
+            welcomeLabel.setText("Welcome, " + person.getWelcomeName());
+            welcomeLabel1.setText("Welcome, " + person.getWelcomeName());
+            welcomeLabel2.setText("Welcome, " + person.getWelcomeName());
+        });
+    }
 
     @FXML
     private void clickBtn(ActionEvent actionEvent) {
@@ -40,5 +46,11 @@ public class Employee {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void addPerson(ActionEvent actionEvent) {
+    }
+
+    public void onClickSubmit(ActionEvent actionEvent) {
     }
 }

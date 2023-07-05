@@ -55,6 +55,9 @@ public class Authorization {
             } else if (personRole.equals("client")) {
                 Client controller = loader.getController();
                 controller.passPerson(person);
+            } else if (personRole.equals("employee")) {
+                Employee controller = loader.getController();
+                controller.passPerson(person);
             }
             Scene scene = signInButton.getScene();
             scene.setRoot(root);

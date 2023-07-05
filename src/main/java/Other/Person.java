@@ -24,6 +24,16 @@ public class Person {
         this.role = role;
     }
 
+    public Person(String firstname, String surname, String lastname, String address, String phoneNumber, String username, String role) {
+        this.firstname = firstname;
+        this.surname = surname;
+        this.lastname = lastname;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.username = username;
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }

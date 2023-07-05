@@ -78,6 +78,10 @@ public class Pet {
         }
     }
 
+    public String getBreedName() {
+        return breed.getName();
+    }
+
     @Override
     public String toString() {
         return name;

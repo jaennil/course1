@@ -16,7 +16,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Employee">
    <children>
-      <TabPane prefHeight="696.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" prefHeight="696.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <Tab text="Add person">
                <content>
@@ -46,7 +46,7 @@
                         <TextField fx:id="surnameField" maxWidth="150" promptText="surname" />
                         <Label fx:id="lastnameEmptyLabel" text="lastname is empty" textFill="red" visible="false" />
                         <TextField fx:id="lastnameField" maxWidth="150" promptText="lastname" />
-                        <Label fx:id="firstnameEmptyLabel1" layoutX="311.0" layoutY="268.0" text="phone number is empty" textFill="red" visible="false" />
+                        <Label fx:id="phoneNumberEmptyLabel" layoutX="311.0" layoutY="268.0" text="phone number is empty" textFill="red" visible="false" />
                         <TextField fx:id="phoneNumberField" layoutX="285.0" layoutY="285.0" maxWidth="150" promptText="phone number" />
                         <Button defaultButton="true" onAction="#addPerson" text="add" />
                      </children>
@@ -84,7 +84,7 @@
                               </VBox>
                               <VBox alignment="CENTER">
                                  <children>
-                                    <ComboBox fx:id="personComboBox1" prefWidth="150.0" promptText="Choose..." />
+                                    <ComboBox fx:id="personComboBoxInAddPet" prefWidth="150.0" promptText="Choose..." />
                                  </children>
                               </VBox>
                            </children>
@@ -185,7 +185,7 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <Button onAction="#onClickSubmit" text="Submit" />
+                        <Button onAction="#addAppointment" text="Submit" />
                         <Label layoutX="219.0" layoutY="119.0" text="Persons appointments">
                            <font>
                               <Font name="System Bold" size="14.0" />

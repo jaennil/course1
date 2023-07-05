@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Registration {
-
     public void addUser(String firstname, String surname, String lastname, String username, String password, String role) {
         Database db = Database.getInstance();
         String statement = "insert into people (firstname, surname, lastname, address, phone_number, username, password_hash, role) value (?,?,?,?,?,?,?,?)";

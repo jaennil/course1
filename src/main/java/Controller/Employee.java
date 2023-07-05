@@ -5,9 +5,7 @@ import Other.Breed;
 import Other.Database;
 import Other.Person;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,7 +19,6 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class Employee implements Initializable {
-
     private final Model.Employee model = new Model.Employee();
     public Label welcomeLabel;
     public Label welcomeLabel1;
@@ -128,6 +125,7 @@ public class Employee implements Initializable {
         welcomeLabel2.setText("Welcome, " + person.getWelcomeName());
 
     }
+
     private void initPersonComboBox() {
         personComboBoxInAddPet.setItems(model.persons);
         personComboBox.setItems(model.persons);

@@ -11,7 +11,7 @@ public class App extends Application {
 
     public static Scene scene;
 
-    public static void main(String[] args) {
+    public static void call() {
         launch();
     }
 

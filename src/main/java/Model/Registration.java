@@ -1,7 +1,7 @@
-package org.example.Model;
+package Model;
 
-import org.example.Database;
-import org.example.Hash;
+import Other.Database;
+import Other.Hash;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -9,7 +9,7 @@ public class Registration {
 
     public void addUser(String firstname, String surname, String lastname, String username, String password, String role) {
         Database db = Database.getInstance();
-        String statement = "insert into Person (firstname, surname, lastname, address, phone_number, username, password_hash, role) value (?,?,?,?,?,?,?,?)";
+        String statement = "insert into people (firstname, surname, lastname, address, phone_number, username, password_hash, role) value (?,?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(statement)) {
             preparedStatement.setString(1, firstname);
             preparedStatement.setString(2, surname);

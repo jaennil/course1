@@ -1,4 +1,4 @@
-package org.example;
+package Other;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,17 +10,6 @@ public class Breed {
     @Override
     public String toString() {
         return name;
-    }
-
-    public static Breed fromResultSet(ResultSet resultSet) {
-        try {
-            return new Breed(
-                    resultSet.getInt("id"),
-                    resultSet.getString("name")
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public int getId() {
@@ -39,8 +28,19 @@ public class Breed {
         this.name = name;
     }
 
-    private Breed(int id, String name) {
+    public Breed(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public static Breed fromResultSet(ResultSet resultSet) {
+        try {
+            return new Breed(
+                    resultSet.getInt("id"),
+                    resultSet.getString("name")
+                    );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

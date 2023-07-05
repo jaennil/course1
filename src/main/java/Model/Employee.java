@@ -1,4 +1,4 @@
-package org.example.Model;
+package Model;
 
 public class Employee {
 //    private final ObservableList<Post> posts;

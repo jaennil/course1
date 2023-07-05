@@ -1,4 +1,4 @@
-package org.example.Controller;
+package Controller;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import org.example.App;
-import org.example.Database;
+import Other.Database;
 
 import java.io.IOException;
 import java.net.URL;

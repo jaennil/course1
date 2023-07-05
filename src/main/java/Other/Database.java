@@ -1,4 +1,4 @@
-package org.example;
+package Other;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -49,7 +49,7 @@ public class Database {
     public static HashMap<String, String> getFullNameByUsername(String username) {
         HashMap<String, String> fullName = new HashMap<>();
         Database db = Database.getInstance();
-        String statement = "SELECT firstname, surname, lastname FROM Person WHERE username = ?";
+        String statement = "SELECT firstname, surname, lastname FROM people WHERE username = ?";
         Connection connection = db.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
             preparedStatement.setString(1, username);

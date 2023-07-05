@@ -1,4 +1,4 @@
-package org.example.Controller;
+package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ public class Employee {
     public TableColumn nameColumn;
     @FXML
     public TableColumn shortNameColumn;
-    private final org.example.Model.Employee model = new org.example.Model.Employee();
+    private final Model.Employee model = new Model.Employee();
 
 //    @Override
 //    public void initialize(URL location, ResourceBundle resources) {

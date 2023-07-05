@@ -1,4 +1,4 @@
-package org.example.Controller;
+package Controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -9,7 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
-import org.example.Database;
+import Other.Database;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Admin implements Initializable {
-    private final org.example.Model.Registration model = new org.example.Model.Registration();
+    private final Model.Registration model = new Model.Registration();
     public Label firstnameEmptyLabel;
     public Label surnameEmptyLabel;
     public TextField firstnameField;

@@ -1,4 +1,4 @@
-package org.example.Controller;
+package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,12 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
-import org.example.Person;
+import Other.Person;
 
 import java.io.IOException;
 
 public class Authorization {
-    private final org.example.Model.Authorization model = new org.example.Model.Authorization();
+    private final Model.Authorization model = new Model.Authorization();
     public Label emptyUsernameLabel;
     public Label emptyPasswordLabel;
     public Button signInButton;

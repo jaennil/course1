@@ -1,19 +1,16 @@
-package org.example.Controller;
+package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import org.example.App;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Registration {
-    private final org.example.Model.Registration model = new org.example.Model.Registration();
+    private final Model.Registration model = new Model.Registration();
     public TextField usernameField;
     public TextField passwordField;
     public TextField firstnameField;

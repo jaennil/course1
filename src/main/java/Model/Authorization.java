@@ -1,8 +1,8 @@
-package org.example.Model;
+package Model;
 
-import org.example.Database;
-import org.example.Hash;
-import org.example.Person;
+import Other.Database;
+import Other.Hash;
+import Other.Person;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ public class Authorization {
     public Person signInUser(String username, String password) {
         Database db = Database.getInstance();
         String hash = Hash.toString(Hash.hash(password));
-        String statement = "SELECT * FROM Person WHERE username = ? AND password_hash = ?";
+        String statement = "SELECT * FROM people WHERE username = ? AND password_hash = ?";
         Connection connection = db.getConnection();
         PreparedStatement preparedStatement;
         try {

@@ -3,23 +3,24 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="600" spacing="10.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Client">
+<VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="600" spacing="10.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Pet">
     <MenuBar>
         <Menu mnemonicParsing="false" text="Menu">
-            <MenuItem mnemonicParsing="false" text="Appointments" />
-            <MenuItem mnemonicParsing="false" onAction="#setAddPetView" text="My pets" />
+            <RadioMenuItem mnemonicParsing="false" onAction="#setAppointmentView" text="Sign up for an appointment">
+            </RadioMenuItem>
+            <RadioMenuItem mnemonicParsing="false" text="Add pet" />
         </Menu>
     </MenuBar>
 
@@ -35,39 +36,30 @@
     </HBox>
     <Label fx:id="welcomeLabel" text="Welcome, {firstname} {lastname}" />
 
-    <Label text="Sign up for an appointment">
+    <Label text="Add your pet">
         <font>
             <Font name="System Bold" size="14.0" />
         </font>
     </Label>
-    <DatePicker fx:id="datePicker" promptText="date" />
+    <TextField fx:id="nameTextField" maxWidth="150" promptText="name" />
     <HBox alignment="CENTER" spacing="10.0">
         <VBox alignment="CENTER" prefWidth="100.0">
-            <Label text="Pet" />
+            <Label text="Breed" />
         </VBox>
         <VBox alignment="CENTER">
-            <ComboBox fx:id="petComboBox" prefWidth="150.0" promptText="Choose..." />
-        </VBox>
-    </HBox>
-    <HBox alignment="CENTER" spacing="10.0">
-        <VBox alignment="CENTER" prefWidth="100.0">
-            <Label text="Doctor" />
-        </VBox>
-        <VBox alignment="CENTER">
-            <ComboBox fx:id="doctorComboBox" prefWidth="150.0" promptText="Choose..." />
+            <ComboBox fx:id="breedComboBox" prefWidth="150.0" promptText="Choose..." />
         </VBox>
     </HBox>
     <Button onAction="#onClickSubmit" text="Submit" />
-   <Label  layoutX="219.0" layoutY="119.0" text="Your appointments">
+   <Label text="My pets">
       <font>
          <Font name="System Bold" size="14.0" />
       </font>
    </Label>
-   <TableView fx:id="appointmentsTableView" maxWidth="450.0" prefHeight="200.0" prefWidth="200.0">
-       <columns>
-           <TableColumn fx:id="petColumn" prefWidth="150.0" text="Pet" />
-           <TableColumn fx:id="doctorColumn" prefWidth="150.0" text="Doctor" />
-           <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Date" />
-       </columns>
+   <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+     <columns>
+       <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="name" />
+       <TableColumn fx:id="breedColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="breed" />
+     </columns>
    </TableView>
 </VBox>

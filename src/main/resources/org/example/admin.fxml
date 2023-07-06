@@ -113,7 +113,7 @@
                </VBox>
                <VBox alignment="CENTER">
                   <children>
-                     <Label fx:id="passwordEmptyLabel1" text="role isn't selected" textFill="red" visible="false" />
+                     <Label fx:id="roleEmptyLabel" text="role isn't selected" textFill="red" visible="false" />
                      <ComboBox fx:id="roleComboBox" prefWidth="150.0" promptText="Choose..." />
                   </children>
                </VBox>

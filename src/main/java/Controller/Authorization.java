@@ -51,7 +51,7 @@ public class Authorization {
             Parent root = loader.load();
             if (personRole.equals("admin")) {
                 Admin controller = loader.getController();
-                controller.passUsername(username);
+                controller.passPerson(person);
             } else if (personRole.equals("client")) {
                 Client controller = loader.getController();
                 controller.passPerson(person);

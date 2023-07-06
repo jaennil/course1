@@ -1,5 +1,6 @@
 package Controller;
 
+import Other.Person;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -9,11 +10,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
-import Other.Database;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Admin implements Initializable {
@@ -30,7 +28,20 @@ public class Admin implements Initializable {
     public PasswordField passwordField;
     public Label welcomeLabel;
     public ComboBox<String> roleComboBox;
-    private String labelText;
+    private Person person;
+
+    public void passPerson(Person person) {
+        this.person = person;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        roleComboBox.getItems().add("employee");
+        roleComboBox.getItems().add("doctor");
+        Platform.runLater(() -> {
+            welcomeLabel.setText("Welcome, " + person.getWelcomeName());
+        });
+    }
 
     public void addEmployee(ActionEvent actionEvent) {
         String firstname = firstnameField.getText();
@@ -38,6 +49,7 @@ public class Admin implements Initializable {
         String lastname = lastnameField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String role = roleComboBox.getValue();
         boolean firstnameIsBlank = firstname.isBlank();
         boolean surnameIsBlank = surname.isBlank();
         boolean lastnameIsBlank = lastname.isBlank();
@@ -48,6 +60,7 @@ public class Admin implements Initializable {
         lastnameField.setStyle(lastnameIsBlank ? "-fx-border-color: red;" : "");
         usernameField.setStyle(usernameIsBlank ? "-fx-border-color: red;" : "");
         passwordField.setStyle(passwordIsBlank ? "-fx-border-color: red;" : "");
+        roleComboBox.setStyle(role == null ? "-fx-border-color: red;" : "");
         firstnameEmptyLabel.setVisible(firstnameIsBlank);
         surnameEmptyLabel.setVisible(surnameIsBlank);
         lastnameEmptyLabel.setVisible(lastnameIsBlank);
@@ -55,14 +68,9 @@ public class Admin implements Initializable {
         passwordEmptyLabel.setVisible(passwordIsBlank);
         if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank)
             return;
-        if (roleComboBox.getValue() == null)
+        if (role == null)
             return;
         model.addUser(firstname, surname, lastname, username, password, roleComboBox.getValue());
-    }
-
-    public void passUsername(String username) {
-        HashMap<String, String> fullName = Database.getFullNameByUsername(username);
-        labelText = "Welcome, " + fullName.get("firstname") + " " + fullName.get("lastname");
     }
 
     public void logOut(MouseEvent mouseEvent) {
@@ -71,14 +79,5 @@ public class Admin implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> {
-            welcomeLabel.setText(labelText);
-            roleComboBox.getItems().add("employee");
-            roleComboBox.getItems().add("doctor");
-        });
     }
 }

@@ -7,6 +7,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
 import org.example.App;
 
 import java.io.IOException;
@@ -48,8 +49,10 @@ public class Authorization {
             preparedStatement.setString(1, username.get());
             preparedStatement.setString(2, hash);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (!resultSet.next())
+            if (!resultSet.next()) {
+                showWrongCredentialsDialog();
                 return;
+            }
             AuthenticatedUser.initFromResultSet(resultSet);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -64,6 +67,14 @@ public class Authorization {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void showWrongCredentialsDialog() {
+        Alert dialog = new Alert(Alert.AlertType.ERROR);
+        dialog.setTitle("Authentication");
+        dialog.setHeaderText("Failed to authenticated");
+        dialog.setContentText("Wrong username or password");
+        dialog.showAndWait();
     }
 
     public void signUp() {

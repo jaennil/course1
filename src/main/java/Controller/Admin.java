@@ -37,9 +37,7 @@ public class Admin implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> roles = FXCollections.observableArrayList("Employee", "Doctor");
         roleComboBox.setItems(roles);
-        Platform.runLater(() -> {
-            welcomeLabel.setText("Welcome, " + person.getWelcomeName());
-        });
+        Platform.runLater(() -> welcomeLabel.setText("Welcome, " + person.getWelcomeName()));
     }
 
     public void addEmployee(ActionEvent actionEvent) {

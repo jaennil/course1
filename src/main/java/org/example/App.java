@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 public class App extends Application {
 
-    public static Scene scene;
+    private static Scene scene;
 
     public static void call() {
         launch();

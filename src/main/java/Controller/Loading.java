@@ -15,18 +15,17 @@ import java.util.ResourceBundle;
 public class Loading implements Initializable {
     @FXML
     private Label connectionProgress;
+    private final Model.Loading model = new Model.Loading();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        connectionProgress.textProperty().bindBidirectional(model.connectionResultProperty());
         delay(100, () -> {
             Database.getInstance();
-            boolean connected = Database.connect();
-            if (!connected) {
-                connectionProgress.setText("Failed to connect. Please check your VPN and restart the app.");
+            boolean isConnected = Database.connect();
+            model.setConnected(isConnected);
+            if (!isConnected)
                 return;
-            }
-
-            connectionProgress.setText("Successfully connected. Please wait");
             Platform.runLater(() -> {
                 try {
                     App.setRoot("authorization");
@@ -40,7 +39,7 @@ public class Loading implements Initializable {
     public static void delay(long millis, Runnable continuation) {
         Task<Void> sleeper = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 try {
                     Thread.sleep(millis);
                 } catch (InterruptedException e) {

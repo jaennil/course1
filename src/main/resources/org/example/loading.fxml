@@ -8,6 +8,6 @@
       fx:controller="Controller.Loading">
     <Label text="Welcome!"/>
     <HBox alignment="CENTER">
-        <Label fx:id="connectionProgress" text="Connecting to database..."/>
+        <Label fx:id="connectionProgress" />
     </HBox>
 </VBox>

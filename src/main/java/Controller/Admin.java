@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import org.example.App;
 import java.io.IOException;
@@ -72,6 +69,11 @@ public class Admin implements Initializable {
         if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank || roleIsNull)
             return;
         model.addUser(firstname, surname, lastname, username, password, role);
+        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+        dialog.setTitle("Adding employee");
+        dialog.setHeaderText("Successfully added employee");
+        dialog.setContentText(surname + " " + firstname + " " + lastname);
+        dialog.showAndWait();
     }
 
     public void logOut(MouseEvent mouseEvent) {

@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <VBox alignment="TOP_CENTER" prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Admin">
     <HBox alignment="TOP_RIGHT" style="-fx-padding: 10px;">
     <Label onMouseClicked="#logOut" text="Log out" textFill="blue">

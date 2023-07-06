@@ -2,6 +2,8 @@ package Controller;
 
 import Other.Person;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -36,8 +38,8 @@ public class Admin implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        roleComboBox.getItems().add("employee");
-        roleComboBox.getItems().add("doctor");
+        ObservableList<String> roles = FXCollections.observableArrayList("Employee", "Doctor");
+        roleComboBox.setItems(roles);
         Platform.runLater(() -> {
             welcomeLabel.setText("Welcome, " + person.getWelcomeName());
         });
@@ -55,22 +57,21 @@ public class Admin implements Initializable {
         boolean lastnameIsBlank = lastname.isBlank();
         boolean usernameIsBlank = username.isBlank();
         boolean passwordIsBlank = password.isBlank();
+        boolean roleIsNull = role == null;
         firstnameField.setStyle(firstnameIsBlank ? "-fx-border-color: red;" : "");
         surnameField.setStyle(surnameIsBlank ? "-fx-border-color: red;" : "");
         lastnameField.setStyle(lastnameIsBlank ? "-fx-border-color: red;" : "");
         usernameField.setStyle(usernameIsBlank ? "-fx-border-color: red;" : "");
         passwordField.setStyle(passwordIsBlank ? "-fx-border-color: red;" : "");
-        roleComboBox.setStyle(role == null ? "-fx-border-color: red;" : "");
+        roleComboBox.setStyle(roleIsNull ? "-fx-border-color: red;" : "");
         firstnameEmptyLabel.setVisible(firstnameIsBlank);
         surnameEmptyLabel.setVisible(surnameIsBlank);
         lastnameEmptyLabel.setVisible(lastnameIsBlank);
         usernameEmptyLabel.setVisible(usernameIsBlank);
         passwordEmptyLabel.setVisible(passwordIsBlank);
-        if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank)
+        if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank || roleIsNull)
             return;
-        if (role == null)
-            return;
-        model.addUser(firstname, surname, lastname, username, password, roleComboBox.getValue());
+        model.addUser(firstname, surname, lastname, username, password, role);
     }
 
     public void logOut(MouseEvent mouseEvent) {

@@ -56,4 +56,9 @@ public class Pet implements Initializable {
         Other.Pet pet = tableView.getSelectionModel().getSelectedItem();
         model.deletePet(pet);
     }
+
+    public void onClickUpdate() {
+        Other.Pet pet = tableView.getSelectionModel().getSelectedItem();
+        model.updatePet(pet);
+    }
 }

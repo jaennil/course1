@@ -62,7 +62,8 @@ public class Pet {
         }
     }
 
-    private void readPetsFromDatabase() {
+    public void readPetsFromDatabase() {
+        pets.clear();
         String statement = "select * from pets where owner_id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
             preparedStatement.setInt(1, authenticatedUser.getId());
@@ -88,7 +89,6 @@ public class Pet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        pets.clear();
         readPetsFromDatabase();
     }
 
@@ -117,5 +117,18 @@ public class Pet {
             throw new RuntimeException(e);
         }
         pets.remove(pet);
+    }
+
+    public void updatePet(Other.Pet pet) {
+        String statement = "update pets set name = ?, breed_id = ? where id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setString(1, name.get());
+            preparedStatement.setInt(2, breed.get().getId());
+            preparedStatement.setInt(3, pet.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        readPetsFromDatabase();
     }
 }

@@ -56,7 +56,12 @@
              <TableColumn fx:id="breedColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="breed" />
            </columns>
          </TableView>
-         <Button onAction="#onClickDelete" mnemonicParsing="false" text="Delete" />
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+            <children>
+               <Button mnemonicParsing="false" onAction="#onClickDelete" text="Delete" />
+               <Button mnemonicParsing="false" onAction="#onClickUpdate" text="Update" />
+            </children>
+         </VBox>
       </children>
    </HBox>
 </VBox>

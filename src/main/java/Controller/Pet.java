@@ -1,26 +1,12 @@
 package Controller;
 
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import org.example.App;
 import Other.Breed;
-import Other.Database;
-import Other.Person;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Pet implements Initializable {
@@ -64,5 +50,10 @@ public class Pet implements Initializable {
         model.setName(nameTextField.getText());
         model.setBreed(breedComboBox.getValue());
         model.addPet();
+    }
+
+    public void onClickDelete() {
+        Other.Pet pet = tableView.getSelectionModel().getSelectedItem();
+        model.deletePet(pet);
     }
 }

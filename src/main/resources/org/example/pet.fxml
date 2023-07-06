@@ -48,10 +48,15 @@
          <Font name="System Bold" size="14.0" />
       </font>
    </Label>
-   <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
-     <columns>
-       <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="name" />
-       <TableColumn fx:id="breedColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="breed" />
-     </columns>
-   </TableView>
+   <HBox alignment="CENTER" spacing="10.0">
+      <children>
+         <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+           <columns>
+             <TableColumn fx:id="nameColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="name" />
+             <TableColumn fx:id="breedColumn" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="breed" />
+           </columns>
+         </TableView>
+         <Button onAction="#onClickDelete" mnemonicParsing="false" text="Delete" />
+      </children>
+   </HBox>
 </VBox>

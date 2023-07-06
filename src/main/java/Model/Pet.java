@@ -107,4 +107,15 @@ public class Pet {
             throw new RuntimeException(e);
         }
     }
+
+    public void deletePet(Other.Pet pet) {
+        String statement = "delete from pets where id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setInt(1, pet.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        pets.remove(pet);
+    }
 }

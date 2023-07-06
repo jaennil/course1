@@ -2,6 +2,7 @@ package Other;
 
 import java.sql.*;
 
+
 public class Database {
     private static Database instance;
     private static Connection connection;

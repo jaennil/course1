@@ -14,6 +14,7 @@ public class Employee {
     public ObservableList<Person> persons;
     public ObservableList<Other.Pet> pets;
     public ObservableList<Appointment> appointments;
+    public AuthenticatedUser authenticatedUser = AuthenticatedUser.getInstance();
 
     public Employee() {
         persons = FXCollections.observableArrayList();
@@ -41,7 +42,7 @@ public class Employee {
     }
 
     public void addPet(Person person, String petName, Breed breed) {
-        pets.add(new Other.Pet(petName, breed, person));
+        pets.add(new Other.Pet(petName, breed.getId(), person.getId()));
         Database database = Database.getInstance();
         Connection connection = database.getConnection();
         String statement = "insert into pets (name, breed_id, owner_id) value (?, ?, ?)";
@@ -63,7 +64,7 @@ public class Employee {
             preparedStatement.setInt(1, owner.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                pets.add(Pet.fromResultSet(resultSet, owner));
+                pets.add(Pet.fromResultSet(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -76,9 +77,9 @@ public class Employee {
         Connection connection = database.getConnection();
         String statement = "insert into appointments (pet_id, person_id, doctor_id, date) value (?,?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
-            preparedStatement.setInt(1, appointment.getPet().getId());
-            preparedStatement.setInt(2, appointment.getPerson().getId());
-            preparedStatement.setInt(3, appointment.getDoctor().getId());
+            preparedStatement.setInt(1, appointment.getPetId());
+            preparedStatement.setInt(2, appointment.getPersonId());
+            preparedStatement.setInt(3, appointment.getDoctorId());
             preparedStatement.setDate(4, appointment.getDate());
             preparedStatement.executeUpdate();
             appointments.add(appointment);
@@ -95,7 +96,7 @@ public class Employee {
             preparedStatement.setInt(1, person.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                appointments.add(Appointment.fromResultSet(resultSet, person));
+                appointments.add(Appointment.fromResultSet(resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

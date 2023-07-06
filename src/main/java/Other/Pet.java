@@ -8,8 +8,34 @@ import java.sql.SQLException;
 public class Pet {
     private int id;
     private String name;
-    private Breed breed;
-    private Person owner;
+    private int breed_id;
+    private int owner_id;
+
+    public Pet(int id, String name, int breed_id, int owner_id) {
+        this.id = id;
+        this.name = name;
+        this.breed_id = breed_id;
+        this.owner_id = owner_id;
+    }
+
+    public Pet(String name, int breed_id, int owner_id) {
+        this.name = name;
+        this.breed_id = breed_id;
+        this.owner_id = owner_id;
+    }
+
+    public static Pet fromResultSet(ResultSet resultSet) {
+        try {
+            return new Pet(
+                    resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("breed_id"),
+                    resultSet.getInt("owner_id")
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public int getId() {
         return id;
@@ -27,59 +53,35 @@ public class Pet {
         this.name = name;
     }
 
-    public Breed getBreed() {
-        return breed;
+    public int getBreedId() {
+        return breed_id;
     }
 
-    public void setBreed(Breed breed) {
-        this.breed = breed;
+    public void setBreedId(int breed_id) {
+        this.breed_id = breed_id;
     }
 
-    public Person getOwner() {
-        return owner;
+    public int getOwnerId() {
+        return owner_id;
     }
 
-    public void setOwner(Person owner) {
-        this.owner = owner;
-    }
-
-    public Pet(int id, String name, Breed breed, Person owner) {
-        this.id = id;
-        this.name = name;
-        this.breed = breed;
-        this.owner = owner;
-    }
-
-    public Pet(String name, Breed breed, Person owner) {
-        this.name = name;
-        this.breed = breed;
-        this.owner = owner;
-    }
-
-    public static Pet fromResultSet(ResultSet resultSet, Person owner) {
-        Database database = Database.getInstance();
-        Connection connection = database.getConnection();
-        String statement = "select * from breeds where id = ?";
-        Breed breed;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
-            preparedStatement.setInt(1, resultSet.getInt("breed_id"));
-            ResultSet resultSetBreed = preparedStatement.executeQuery();
-            if (!resultSetBreed.next())
-                return null;
-            breed = Breed.fromResultSet(resultSetBreed);
-            return new Pet(
-                    resultSet.getInt("id"),
-                    resultSet.getString("name"),
-                    breed,
-                    owner
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public void setOwnerId(int owner_id) {
+        this.owner_id = owner_id;
     }
 
     public String getBreedName() {
-        return breed.getName();
+        Database database = Database.getInstance();
+        Connection connection = database.getConnection();
+        String statement = "select * from breeds where id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setInt(1, breed_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (!resultSet.next())
+                throw new RuntimeException();
+            return resultSet.getString("name");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

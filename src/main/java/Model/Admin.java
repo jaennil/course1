@@ -78,7 +78,7 @@ public class Admin {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setTitle("Adding employee");
         dialog.setHeaderText("Successfully added employee");
-        dialog.setContentText(surname + " " + firstname + " " + lastname);
+        dialog.setContentText(surname.get() + " " + firstname.get() + " " + lastname.get());
         dialog.showAndWait();
     }
 

@@ -46,11 +46,6 @@ public class Employee implements Initializable {
     public TableColumn<Appointment, String> doctorColumn;
     public TableColumn<Appointment, String> dateColumn;
     public TabPane tabPane;
-    private Person person;
-
-    public void passPerson(Person person) {
-        this.person = person;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,9 +115,9 @@ public class Employee implements Initializable {
     }
 
     private void initWelcomeLabels() {
-        welcomeLabel.setText("Welcome, " + person.getWelcomeName());
-        welcomeLabel1.setText("Welcome, " + person.getWelcomeName());
-        welcomeLabel2.setText("Welcome, " + person.getWelcomeName());
+        welcomeLabel.setText("Welcome, " + model.authenticatedUser.getWelcomeName());
+        welcomeLabel1.setText("Welcome, " + model.authenticatedUser.getWelcomeName());
+        welcomeLabel2.setText("Welcome, " + model.authenticatedUser.getWelcomeName());
 
     }
 
@@ -202,7 +197,7 @@ public class Employee implements Initializable {
         Person person1 = personComboBox.getValue();
         Other.Pet pet = petComboBox.getValue();
         Person doctor = doctorComboBox.getValue();
-        Appointment appointment = new Appointment(pet, person1, doctor, Date.valueOf(date));
+        Appointment appointment = new Appointment(pet.getId(), person1.getId(), doctor.getId(), Date.valueOf(date));
         model.addAppointment(appointment);
     }
 

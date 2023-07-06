@@ -24,69 +24,45 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Pet implements Initializable {
-    public TextField nameTextField;
+    public Label nameEmptyLabel;
+    public Label breedEmptyLabel;
     Model.Pet model = new Model.Pet();
+    public TextField nameTextField;
     public Label welcomeLabel;
     public ComboBox<Breed> breedComboBox;
     public TableView<Other.Pet> tableView;
     public TableColumn<Other.Pet, String> nameColumn;
     public TableColumn<Other.Pet, String> breedColumn;
-    private Person person;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> {
-            welcomeLabel.setText("Welcome, " + person.getWelcomeName());
-            initBreedComboBox();
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            breedColumn.setCellValueFactory(new PropertyValueFactory<>("breed"));
-            ObservableList<Other.Pet> observableList = model.getPersonPets(person);
-            tableView.setItems(observableList);
-        });
+        welcomeLabel.textProperty().bindBidirectional(model.welcomeText);
+
+        nameTextField.textProperty().addListener((observable, oldValue, newValue) -> model.setName(newValue));
+        nameTextField.styleProperty().bindBidirectional(model.nameFieldStyle);
+        nameEmptyLabel.visibleProperty().bindBidirectional(model.nameEmpty);
+
+        breedComboBox.valueProperty().addListener((observable, oldValue, newValue) -> model.setBreed(newValue));
+        breedComboBox.styleProperty().bindBidirectional(model.breedComboBoxStyle);
+        breedEmptyLabel.visibleProperty().bindBidirectional(model.breedEmpty);
+
+        breedComboBox.setItems(model.breeds);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        breedColumn.setCellValueFactory(new PropertyValueFactory<>("breedName"));
+        tableView.setItems(model.pets);
     }
 
-    private void initBreedComboBox() {
-        Database database = Database.getInstance();
-        Connection connection = database.getConnection();
-        String statement = "select * from breeds";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Breed breed = Breed.fromResultSet(resultSet);
-                breedComboBox.getItems().add(breed);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public void onClickAppointmentView() {
+        model.setAppointmentView();
     }
 
-    public void setAppointmentView(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("client.fxml"));
-        try {
-            Parent root = loader.load();
-            Client controller = loader.getController();
-            controller.passPerson(person);
-            Scene scene = welcomeLabel.getScene();
-            scene.setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void onClickLogOut() {
+        model.logOut();
     }
 
-    public void passPerson(Person person) {
-        this.person = person;
-    }
-
-    public void logOut(MouseEvent mouseEvent) {
-        try {
-            App.setRoot("authorization");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void onClickSubmit(ActionEvent actionEvent) {
-        Other.Pet pet = new Other.Pet(nameTextField.getText(), breedComboBox.getValue(), person);
-        model.addPet(pet);
+    public void onClickSubmit() {
+        model.setName(nameTextField.getText());
+        model.setBreed(breedComboBox.getValue());
+        model.addPet();
     }
 }

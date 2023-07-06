@@ -1,49 +1,109 @@
 package Model;
 
+import Other.AuthenticatedUser;
+import Other.Breed;
+import Other.Database;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import Other.Database;
-import Other.Person;
+import org.example.App;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Pet {
-    ObservableList<Other.Pet> pets;
+    public final StringProperty nameFieldStyle = new SimpleStringProperty();
+    public final StringProperty breedComboBoxStyle = new SimpleStringProperty();
+    private final String highlightedStyle = "-fx-border-color: red; -fx-border-width: 2px;";
+    private final String defaultStyle = "";
+    public AuthenticatedUser authenticatedUser = AuthenticatedUser.getInstance();
+    public StringProperty welcomeText = new SimpleStringProperty("Welcome, " + authenticatedUser.getWelcomeName());
+    public StringProperty name = new SimpleStringProperty();
+    public BooleanProperty nameEmpty = new SimpleBooleanProperty(false);
+    public BooleanProperty breedEmpty = new SimpleBooleanProperty(false);
+    public ObjectProperty<Breed> breed = new SimpleObjectProperty<>();
+    public ObservableList<Other.Pet> pets;
+    public ObservableList<Breed> breeds;
+    Database database = Database.getInstance();
+    Connection connection = database.getConnection();
 
     public Pet() {
         pets = FXCollections.observableArrayList();
+        breeds = FXCollections.observableArrayList();
+        readBreedsFromDatabase();
+        readPetsFromDatabase();
     }
-    public ObservableList<Other.Pet> getPersonPets(Person person) {
-        Database database = Database.getInstance();
-        Connection connection = database.getConnection();
-        String statement = "select * from pets where owner_id = ?";
+
+    public void setName(String name) {
+        this.name.set(name);
+        nameFieldStyle.set(name.isBlank() ? highlightedStyle : defaultStyle);
+        nameEmpty.set(name.isBlank());
+    }
+
+    public void setBreed(Breed breed) {
+        this.breed.set(breed);
+        breedComboBoxStyle.set(breed == null ? highlightedStyle : defaultStyle);
+        breedEmpty.set(breed == null);
+    }
+
+    private void readBreedsFromDatabase() {
+        String statement = "select * from breeds";
         try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
-            preparedStatement.setInt(1, person.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Other.Pet pet = Other.Pet.fromResultSet(resultSet, person);
+                Breed breed = Breed.fromResultSet(resultSet);
+                breeds.add(breed);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void readPetsFromDatabase() {
+        String statement = "select * from pets where owner_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
+            preparedStatement.setInt(1, authenticatedUser.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Other.Pet pet = Other.Pet.fromResultSet(resultSet);
                 pets.add(pet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return pets;
     }
 
-    public void addPet(Other.Pet pet) {
-        Database database = Database.getInstance();
-        Connection connection = database.getConnection();
+    public void addPet() {
+        if (breed.get() == null || name.get().isBlank())
+            return;
         String statement = "insert into pets (name, breed_id, owner_id) value (?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
-            preparedStatement.setString(1, pet.getName());
-            preparedStatement.setInt(2, pet.getBreed().getId());
-            preparedStatement.setInt(3, pet.getOwner().getId());
+            preparedStatement.setString(1, name.get());
+            preparedStatement.setInt(2, breed.get().getId());
+            preparedStatement.setInt(3, authenticatedUser.getId());
             preparedStatement.executeUpdate();
-            pets.add(pet);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        pets.clear();
+        readPetsFromDatabase();
+    }
+
+    public void setAppointmentView() {
+        try {
+            App.setRoot("client");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void logOut() {
+        try {
+            App.setRoot("authorization");
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

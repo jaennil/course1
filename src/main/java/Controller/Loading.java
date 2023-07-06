@@ -20,20 +20,7 @@ public class Loading implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         connectionProgress.textProperty().bindBidirectional(model.connectionResultProperty());
-        delay(100, () -> {
-            Database.getInstance();
-            boolean isConnected = Database.connect();
-            model.setConnected(isConnected);
-            if (!isConnected)
-                return;
-            Platform.runLater(() -> {
-                try {
-                    App.setRoot("authorization");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        });
+        delay(100, model::connectToDatabase);
     }
 
     public static void delay(long millis, Runnable continuation) {

@@ -66,10 +66,6 @@ public class Admin implements Initializable {
     }
 
     public void logOut() {
-        try {
-            App.setRoot("authorization");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        model.logOut();
     }
 }

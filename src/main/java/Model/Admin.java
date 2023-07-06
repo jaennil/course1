@@ -7,7 +7,9 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import org.example.App;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -114,5 +116,13 @@ public class Admin {
         }
         showInformationDialog();
         nullValues();
+    }
+
+    public void logOut() {
+        try {
+            App.setRoot("authorization");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -74,6 +74,12 @@ public class Admin implements Initializable {
         dialog.setHeaderText("Successfully added employee");
         dialog.setContentText(surname + " " + firstname + " " + lastname);
         dialog.showAndWait();
+        firstnameField.clear();
+        surnameField.clear();
+        lastnameField.clear();
+        usernameField.clear();
+        passwordField.clear();
+        roleComboBox.setValue(null);
     }
 
     public void logOut(MouseEvent mouseEvent) {

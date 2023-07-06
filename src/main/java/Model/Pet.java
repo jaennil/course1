@@ -117,6 +117,8 @@ public class Pet {
             throw new RuntimeException(e);
         }
         pets.remove(pet);
+
+
     }
 
     public void updatePet(Other.Pet pet) {

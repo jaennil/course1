@@ -31,6 +31,7 @@ public class Registration {
     private final String highlightedStyle = "-fx-border-color: red; -fx-border-width: 2px;";
     private final String defaultStyle = "";
     public void addUser() {
+        System.out.println(Hash.toString(Hash.hash("admin")));
         if (firstnameEmpty.get() || surnameEmpty.get() || lastnameEmpty.get() || usernameEmpty.get() || passwordEmpty.get())
             return;
         Database database = Database.getInstance();

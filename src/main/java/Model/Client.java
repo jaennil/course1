@@ -21,11 +21,6 @@ public class Client {
     public StringProperty welcomeText = new SimpleStringProperty("Welcome, " + authenticatedUser.getWelcomeName());
     public ObjectProperty<Other.Pet> pet = new SimpleObjectProperty<>();
     public ObjectProperty<Person> doctor = new SimpleObjectProperty<>();
-
-    public void setDate(LocalDate date) {
-        this.date.set(date);
-    }
-
     public ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
     public ObservableList<Appointment> appointments;
     public ObservableList<Person> doctors;
@@ -39,6 +34,10 @@ public class Client {
         readDoctorsFromDatabase();
         readPetsFromDatabase();
         readAppointmentsFromDatabase();
+    }
+
+    public void setDate(LocalDate date) {
+        this.date.set(date);
     }
 
     public void setPet(Pet pet) {

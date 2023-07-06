@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Admin {
-    public ObservableList<String> roles = FXCollections.observableArrayList("Employee", "Doctor");
+    public ObservableList<String> roles = FXCollections.observableArrayList("employee", "doctor");
     public StringProperty firstnameFieldStyle = new SimpleStringProperty();
     public final StringProperty surnameFieldStyle = new SimpleStringProperty();
     public final StringProperty lastnameFieldStyle = new SimpleStringProperty();

@@ -49,31 +49,40 @@ public class Admin implements Initializable {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String role = roleComboBox.getValue();
-        boolean firstnameIsBlank = firstname.isBlank();
-        boolean surnameIsBlank = surname.isBlank();
-        boolean lastnameIsBlank = lastname.isBlank();
-        boolean usernameIsBlank = username.isBlank();
-        boolean passwordIsBlank = password.isBlank();
-        boolean roleIsNull = role == null;
-        firstnameField.setStyle(firstnameIsBlank ? "-fx-border-color: red;" : "");
-        surnameField.setStyle(surnameIsBlank ? "-fx-border-color: red;" : "");
-        lastnameField.setStyle(lastnameIsBlank ? "-fx-border-color: red;" : "");
-        usernameField.setStyle(usernameIsBlank ? "-fx-border-color: red;" : "");
-        passwordField.setStyle(passwordIsBlank ? "-fx-border-color: red;" : "");
-        roleComboBox.setStyle(roleIsNull ? "-fx-border-color: red;" : "");
-        firstnameEmptyLabel.setVisible(firstnameIsBlank);
-        surnameEmptyLabel.setVisible(surnameIsBlank);
-        lastnameEmptyLabel.setVisible(lastnameIsBlank);
-        usernameEmptyLabel.setVisible(usernameIsBlank);
-        passwordEmptyLabel.setVisible(passwordIsBlank);
-        if (firstnameIsBlank || surnameIsBlank || lastnameIsBlank || usernameIsBlank || passwordIsBlank || roleIsNull)
+        spawnWarningLabels();
+        highlightEmptyFields();
+        if (firstname.isBlank() || surname.isBlank() || lastname.isBlank() || username.isBlank() || password.isBlank() || role == null)
             return;
         model.addUser(firstname, surname, lastname, username, password, role);
+        showInformationDialog(firstname, surname, lastname);
+        clearFields();
+    }
+
+    private void highlightEmptyFields() {
+        firstnameField.setStyle(firstnameField.getText().isBlank() ? "-fx-border-color: red;" : "");
+        surnameField.setStyle(surnameField.getText().isBlank() ? "-fx-border-color: red;" : "");
+        lastnameField.setStyle(lastnameField.getText().isBlank() ? "-fx-border-color: red;" : "");
+        usernameField.setStyle(usernameField.getText().isBlank() ? "-fx-border-color: red;" : "");
+        passwordField.setStyle(passwordField.getText().isBlank() ? "-fx-border-color: red;" : "");
+        roleComboBox.setStyle(roleComboBox.getValue() == null ? "-fx-border-color: red;" : "");
+    }
+
+    private void spawnWarningLabels() {
+        firstnameEmptyLabel.setVisible(firstnameField.getText().isBlank());
+        surnameEmptyLabel.setVisible(surnameField.getText().isBlank());
+        lastnameEmptyLabel.setVisible(lastnameField.getText().isBlank());
+        usernameEmptyLabel.setVisible(usernameField.getText().isBlank());
+        passwordEmptyLabel.setVisible(passwordField.getText().isBlank());
+    }
+
+    private void showInformationDialog(String firstname, String surname, String lastname) {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.setTitle("Adding employee");
         dialog.setHeaderText("Successfully added employee");
         dialog.setContentText(surname + " " + firstname + " " + lastname);
         dialog.showAndWait();
+    }
+    private void clearFields() {
         firstnameField.clear();
         surnameField.clear();
         lastnameField.clear();

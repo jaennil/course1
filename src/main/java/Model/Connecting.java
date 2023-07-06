@@ -24,8 +24,10 @@ public class Connecting {
 
     public void connectToDatabase() {
         Database.getInstance();
-        setConnected(Database.connect());
-        authenticateView();
+        boolean isConnected = Database.connect();
+        setConnected(isConnected);
+        if (isConnected)
+            authenticateView();
     }
 
     private void authenticateView() {

@@ -7,10 +7,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.example.App;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 
-public class Loading {
+public class Connecting {
     private final StringProperty connectionResult = new SimpleStringProperty("Connecting to database...");
     public Property<String> connectionResultProperty() {
         return connectionResult;

@@ -13,7 +13,7 @@ public class Person {
     private String username;
     private String role;
 
-    public Person(int id, String firstname, String surname, String lastname, String address, String phoneNumber, String username, String role) {
+    public Person(Integer id, String firstname, String surname, String lastname, String address, String phoneNumber, String username, String role) {
         this.id = id;
         this.firstname = firstname;
         this.surname = surname;

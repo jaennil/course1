@@ -102,5 +102,4 @@ public class Employee {
         }
         return appointments;
     }
-
 }

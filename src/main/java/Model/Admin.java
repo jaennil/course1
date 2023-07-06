@@ -1,8 +1,8 @@
 package Model;
 
+import Other.AuthenticatedUser;
 import Other.Database;
 import Other.Hash;
-import Other.Person;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,8 +33,8 @@ public class Admin {
     public BooleanProperty usernameEmpty = new SimpleBooleanProperty(false);
     public BooleanProperty passwordEmpty = new SimpleBooleanProperty(false);
     public BooleanProperty roleEmpty = new SimpleBooleanProperty(false);
-    public StringProperty welcomeText = new SimpleStringProperty("Welcome, {firstname} {lastname}");
-    public ObjectProperty<Person> authenticatedUser = new SimpleObjectProperty<>();
+    public AuthenticatedUser authenticatedUser = AuthenticatedUser.getInstance();
+    public StringProperty welcomeText = new SimpleStringProperty("Welcome, " + authenticatedUser.getWelcomeName());
     private final String highlightedStyle = "-fx-border-color: red; -fx-border-width: 2px;";
     private final String defaultStyle = "";
 
@@ -72,11 +72,6 @@ public class Admin {
         this.role.set(string);
         roleComboBoxStyle.set(string == null ? highlightedStyle : defaultStyle);
         roleEmpty.set(string == null);
-    }
-
-    public void setAuthenticatedUser(Person user) {
-        authenticatedUser.set(user);
-        welcomeText.set("Welcome, " + user.getWelcomeName());
     }
 
     public void showInformationDialog() {

@@ -24,10 +24,6 @@ public class Admin implements Initializable {
     public ComboBox<String> roleComboBox;
     public Label roleEmptyLabel;
 
-    public void passPerson(Person person) {
-        model.setAuthenticatedUser(person);
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         firstnameField.textProperty().addListener((observable, oldValue, newValue) -> model.setFirstname(newValue));

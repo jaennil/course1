@@ -205,4 +205,7 @@ public class Employee implements Initializable {
         Appointment appointment = new Appointment(pet, person1, doctor, Date.valueOf(date));
         model.addAppointment(appointment);
     }
+
+    public void setAuthenticatedUser(Person user) {
+    }
 }

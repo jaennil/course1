@@ -1,10 +1,7 @@
 package Controller;
 
-import Other.Person;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.example.App;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

@@ -20,17 +20,23 @@ public class Admin {
     public final StringProperty lastnameFieldStyle = new SimpleStringProperty();
     public final StringProperty usernameFieldStyle = new SimpleStringProperty();
     public final StringProperty passwordFieldStyle = new SimpleStringProperty();
+    public final StringProperty numberFieldStyle = new SimpleStringProperty();
+    public final StringProperty addressFieldStyle = new SimpleStringProperty();
     public final StringProperty roleComboBoxStyle = new SimpleStringProperty();
     public final StringProperty firstname = new SimpleStringProperty();
     public final StringProperty surname = new SimpleStringProperty();
     public final StringProperty lastname = new SimpleStringProperty();
     public final StringProperty username = new SimpleStringProperty();
     public final StringProperty password = new SimpleStringProperty();
+    public final StringProperty number = new SimpleStringProperty();
+    public final StringProperty address = new SimpleStringProperty();
     public final StringProperty role = new SimpleStringProperty();
     public BooleanProperty firstnameEmpty = new SimpleBooleanProperty(false);
     public BooleanProperty surnameEmpty = new SimpleBooleanProperty(false);
     public BooleanProperty lastnameEmpty = new SimpleBooleanProperty(false);
     public BooleanProperty usernameEmpty = new SimpleBooleanProperty(false);
+    public BooleanProperty numberEmpty = new SimpleBooleanProperty(false);
+    public BooleanProperty addressEmpty = new SimpleBooleanProperty(false);
     public BooleanProperty passwordEmpty = new SimpleBooleanProperty(false);
     public BooleanProperty roleEmpty = new SimpleBooleanProperty(false);
     public AuthenticatedUser authenticatedUser = AuthenticatedUser.getInstance();
@@ -73,6 +79,16 @@ public class Admin {
         roleComboBoxStyle.set(string == null ? highlightedStyle : defaultStyle);
         roleEmpty.set(string == null);
     }
+    public void setNumber(String string) {
+        this.number.set(string);
+        numberFieldStyle.set(string == null ? highlightedStyle : defaultStyle);
+        numberEmpty.set(string == null);
+    }
+    public void setAddress(String string) {
+        this.address.set(string);
+        addressFieldStyle.set(string == null ? highlightedStyle : defaultStyle);
+        addressEmpty.set(string == null);
+    }
 
     public void showInformationDialog() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
@@ -88,6 +104,8 @@ public class Admin {
         lastname.set("");
         username.set("");
         password.set("");
+        number.set("");
+        address.set("");
         role.set("");
     }
 
@@ -100,8 +118,8 @@ public class Admin {
             preparedStatement.setString(1, firstname.get());
             preparedStatement.setString(2, surname.get());
             preparedStatement.setString(3, lastname.get());
-            preparedStatement.setString(4, null);
-            preparedStatement.setString(5, null);
+            preparedStatement.setString(4, address.get());
+            preparedStatement.setString(5, number.get());
             preparedStatement.setString(6, username.get());
             preparedStatement.setString(7, Hash.toString(Hash.hash(password.get())));
             preparedStatement.setString(8, role.get());

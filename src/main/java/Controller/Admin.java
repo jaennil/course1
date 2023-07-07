@@ -23,6 +23,10 @@ public class Admin implements Initializable {
     public Label welcomeLabel;
     public ComboBox<String> roleComboBox;
     public Label roleEmptyLabel;
+    public TextField numberTextField;
+    public Label numberEmptyLabel;
+    public TextField addressField;
+    public Label addressEmptyLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -31,6 +35,8 @@ public class Admin implements Initializable {
         lastnameField.textProperty().addListener((observable, oldValue, newValue) -> model.setLastname(newValue));
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> model.setUsername(newValue));
         passwordField.textProperty().addListener((observable, oldValue, newValue) -> model.setPassword(newValue));
+        numberTextField.textProperty().addListener((observable, oldValue, newValue) -> model.setNumber(newValue));
+        addressField.textProperty().addListener((observable, oldValue, newValue) -> model.setAddress(newValue));
         roleComboBox.valueProperty().addListener((observable, oldValue, newValue) -> model.setRole(newValue));
 
         firstnameField.styleProperty().bindBidirectional(model.firstnameFieldStyle);
@@ -38,6 +44,8 @@ public class Admin implements Initializable {
         lastnameField.styleProperty().bindBidirectional(model.lastnameFieldStyle);
         usernameField.styleProperty().bindBidirectional(model.usernameFieldStyle);
         passwordField.styleProperty().bindBidirectional(model.passwordFieldStyle);
+        numberTextField.styleProperty().bindBidirectional(model.numberFieldStyle);
+        addressField.styleProperty().bindBidirectional(model.addressFieldStyle);
         roleComboBox.styleProperty().bindBidirectional(model.roleComboBoxStyle);
 
         firstnameEmptyLabel.visibleProperty().bindBidirectional(model.firstnameEmpty);
@@ -46,6 +54,8 @@ public class Admin implements Initializable {
         usernameEmptyLabel.visibleProperty().bindBidirectional(model.usernameEmpty);
         passwordEmptyLabel.visibleProperty().bindBidirectional(model.passwordEmpty);
         roleEmptyLabel.visibleProperty().bindBidirectional(model.roleEmpty);
+        numberEmptyLabel.visibleProperty().bindBidirectional(model.numberEmpty);
+        addressEmptyLabel.visibleProperty().bindBidirectional(model.addressEmpty);
 
         welcomeLabel.textProperty().bindBidirectional(model.welcomeText);
         roleComboBox.setItems(model.roles);

@@ -74,6 +74,36 @@
                </VBox>
             </children>
          </HBox>
+         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="252.0" spacing="30.0">
+            <children>
+               <VBox alignment="BOTTOM_CENTER" prefWidth="100.0">
+                  <children>
+                     <Label text="Phone number" />
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER">
+                  <children>
+                     <Label fx:id="numberEmptyLabel" text="Phone number is empty" textFill="red" visible="false" />
+                     <TextField fx:id="numberTextField" maxWidth="150" promptText="+79234532235" />
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="210.0" spacing="30.0">
+            <children>
+               <VBox alignment="BOTTOM_CENTER" prefWidth="100.0">
+                  <children>
+                     <Label text="Address" />
+                  </children>
+               </VBox>
+               <VBox alignment="CENTER">
+                  <children>
+                     <Label fx:id="addressEmptyLabel" text="Address is empty" textFill="red" visible="false" />
+                     <TextField fx:id="addressField" maxWidth="150" promptText="Bread St." />
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
          <HBox alignment="BOTTOM_CENTER" spacing="30.0">
             <children>
                <VBox alignment="BOTTOM_CENTER" prefWidth="100.0">
